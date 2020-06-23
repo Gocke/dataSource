@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sojson.datasource.one.mapper.DtArticleCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.sojson.datasource.common.model.DtArticleCategory">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="channel_id" jdbcType="INTEGER" property="channelId" />
+    <result column="title" jdbcType="NVARCHAR" property="title" />
+    <result column="call_index" jdbcType="NVARCHAR" property="callIndex" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="class_list" jdbcType="NVARCHAR" property="classList" />
+    <result column="class_layer" jdbcType="INTEGER" property="classLayer" />
+    <result column="sort_id" jdbcType="INTEGER" property="sortId" />
+    <result column="link_url" jdbcType="NVARCHAR" property="linkUrl" />
+    <result column="img_url" jdbcType="NVARCHAR" property="imgUrl" />
+    <result column="seo_title" jdbcType="NVARCHAR" property="seoTitle" />
+    <result column="seo_keywords" jdbcType="NVARCHAR" property="seoKeywords" />
+    <result column="seo_description" jdbcType="NVARCHAR" property="seoDescription" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sojson.datasource.common.model.DtArticleCategory">
+    <result column="content" jdbcType="LONGNVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, channel_id, title, call_index, parent_id, class_list, class_layer, sort_id, link_url, 
+    img_url, seo_title, seo_keywords, seo_description
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.sojson.datasource.common.model.DtArticleCategoryExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dt_article_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.sojson.datasource.common.model.DtArticleCategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dt_article_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dt_article_category
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dt_article_category
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sojson.datasource.common.model.DtArticleCategoryExample">
+    delete from dt_article_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sojson.datasource.common.model.DtArticleCategory">
+    insert into dt_article_category (id, channel_id, title, 
+      call_index, parent_id, class_list, 
+      class_layer, sort_id, link_url, 
+      img_url, seo_title, seo_keywords, 
+      seo_description, content)
+    values (#{id,jdbcType=INTEGER}, #{channelId,jdbcType=INTEGER}, #{title,jdbcType=NVARCHAR}, 
+      #{callIndex,jdbcType=NVARCHAR}, #{parentId,jdbcType=INTEGER}, #{classList,jdbcType=NVARCHAR}, 
+      #{classLayer,jdbcType=INTEGER}, #{sortId,jdbcType=INTEGER}, #{linkUrl,jdbcType=NVARCHAR}, 
+      #{imgUrl,jdbcType=NVARCHAR}, #{seoTitle,jdbcType=NVARCHAR}, #{seoKeywords,jdbcType=NVARCHAR}, 
+      #{seoDescription,jdbcType=NVARCHAR}, #{content,jdbcType=LONGNVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sojson.datasource.common.model.DtArticleCategory">
+    insert into dt_article_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="channelId != null">
+        channel_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="callIndex != null">
+        call_index,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="classList != null">
+        class_list,
+      </if>
+      <if test="classLayer != null">
+        class_layer,
+      </if>
+      <if test="sortId != null">
+        sort_id,
+      </if>
+      <if test="linkUrl != null">
+        link_url,
+      </if>
+      <if test="imgUrl != null">
+        img_url,
+      </if>
+      <if test="seoTitle != null">
+        seo_title,
+      </if>
+      <if test="seoKeywords != null">
+        seo_keywords,
+      </if>
+      <if test="seoDescription != null">
+        seo_description,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="channelId != null">
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="callIndex != null">
+        #{callIndex,jdbcType=NVARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="classList != null">
+        #{classList,jdbcType=NVARCHAR},
+      </if>
+      <if test="classLayer != null">
+        #{classLayer,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null">
+        #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="linkUrl != null">
+        #{linkUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="seoTitle != null">
+        #{seoTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="seoKeywords != null">
+        #{seoKeywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="seoDescription != null">
+        #{seoDescription,jdbcType=NVARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGNVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sojson.datasource.common.model.DtArticleCategoryExample" resultType="java.lang.Long">
+    select count(*) from dt_article_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dt_article_category
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.channelId != null">
+        channel_id = #{record.channelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.callIndex != null">
+        call_index = #{record.callIndex,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.parentId != null">
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.classList != null">
+        class_list = #{record.classList,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.classLayer != null">
+        class_layer = #{record.classLayer,jdbcType=INTEGER},
+      </if>
+      <if test="record.sortId != null">
+        sort_id = #{record.sortId,jdbcType=INTEGER},
+      </if>
+      <if test="record.linkUrl != null">
+        link_url = #{record.linkUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.imgUrl != null">
+        img_url = #{record.imgUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.seoTitle != null">
+        seo_title = #{record.seoTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.seoKeywords != null">
+        seo_keywords = #{record.seoKeywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.seoDescription != null">
+        seo_description = #{record.seoDescription,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGNVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update dt_article_category
+    set id = #{record.id,jdbcType=INTEGER},
+      channel_id = #{record.channelId,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=NVARCHAR},
+      call_index = #{record.callIndex,jdbcType=NVARCHAR},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      class_list = #{record.classList,jdbcType=NVARCHAR},
+      class_layer = #{record.classLayer,jdbcType=INTEGER},
+      sort_id = #{record.sortId,jdbcType=INTEGER},
+      link_url = #{record.linkUrl,jdbcType=NVARCHAR},
+      img_url = #{record.imgUrl,jdbcType=NVARCHAR},
+      seo_title = #{record.seoTitle,jdbcType=NVARCHAR},
+      seo_keywords = #{record.seoKeywords,jdbcType=NVARCHAR},
+      seo_description = #{record.seoDescription,jdbcType=NVARCHAR},
+      content = #{record.content,jdbcType=LONGNVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dt_article_category
+    set id = #{record.id,jdbcType=INTEGER},
+      channel_id = #{record.channelId,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=NVARCHAR},
+      call_index = #{record.callIndex,jdbcType=NVARCHAR},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      class_list = #{record.classList,jdbcType=NVARCHAR},
+      class_layer = #{record.classLayer,jdbcType=INTEGER},
+      sort_id = #{record.sortId,jdbcType=INTEGER},
+      link_url = #{record.linkUrl,jdbcType=NVARCHAR},
+      img_url = #{record.imgUrl,jdbcType=NVARCHAR},
+      seo_title = #{record.seoTitle,jdbcType=NVARCHAR},
+      seo_keywords = #{record.seoKeywords,jdbcType=NVARCHAR},
+      seo_description = #{record.seoDescription,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sojson.datasource.common.model.DtArticleCategory">
+    update dt_article_category
+    <set>
+      <if test="channelId != null">
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="callIndex != null">
+        call_index = #{callIndex,jdbcType=NVARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="classList != null">
+        class_list = #{classList,jdbcType=NVARCHAR},
+      </if>
+      <if test="classLayer != null">
+        class_layer = #{classLayer,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null">
+        sort_id = #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="linkUrl != null">
+        link_url = #{linkUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        img_url = #{imgUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="seoTitle != null">
+        seo_title = #{seoTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="seoKeywords != null">
+        seo_keywords = #{seoKeywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="seoDescription != null">
+        seo_description = #{seoDescription,jdbcType=NVARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGNVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sojson.datasource.common.model.DtArticleCategory">
+    update dt_article_category
+    set channel_id = #{channelId,jdbcType=INTEGER},
+      title = #{title,jdbcType=NVARCHAR},
+      call_index = #{callIndex,jdbcType=NVARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      class_list = #{classList,jdbcType=NVARCHAR},
+      class_layer = #{classLayer,jdbcType=INTEGER},
+      sort_id = #{sortId,jdbcType=INTEGER},
+      link_url = #{linkUrl,jdbcType=NVARCHAR},
+      img_url = #{imgUrl,jdbcType=NVARCHAR},
+      seo_title = #{seoTitle,jdbcType=NVARCHAR},
+      seo_keywords = #{seoKeywords,jdbcType=NVARCHAR},
+      seo_description = #{seoDescription,jdbcType=NVARCHAR},
+      content = #{content,jdbcType=LONGNVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sojson.datasource.common.model.DtArticleCategory">
+    update dt_article_category
+    set channel_id = #{channelId,jdbcType=INTEGER},
+      title = #{title,jdbcType=NVARCHAR},
+      call_index = #{callIndex,jdbcType=NVARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      class_list = #{classList,jdbcType=NVARCHAR},
+      class_layer = #{classLayer,jdbcType=INTEGER},
+      sort_id = #{sortId,jdbcType=INTEGER},
+      link_url = #{linkUrl,jdbcType=NVARCHAR},
+      img_url = #{imgUrl,jdbcType=NVARCHAR},
+      seo_title = #{seoTitle,jdbcType=NVARCHAR},
+      seo_keywords = #{seoKeywords,jdbcType=NVARCHAR},
+      seo_description = #{seoDescription,jdbcType=NVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

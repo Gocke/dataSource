@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sojson.datasource.one.mapper.DtArticleMapper">
+  <resultMap id="BaseResultMap" type="com.sojson.datasource.common.model.DtArticle">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="channel_id" jdbcType="INTEGER" property="channelId" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="call_index" jdbcType="NVARCHAR" property="callIndex" />
+    <result column="title" jdbcType="NVARCHAR" property="title" />
+    <result column="title_attrib" jdbcType="NVARCHAR" property="titleAttrib" />
+    <result column="link_url" jdbcType="NVARCHAR" property="linkUrl" />
+    <result column="img_url" jdbcType="NVARCHAR" property="imgUrl" />
+    <result column="seo_title" jdbcType="NVARCHAR" property="seoTitle" />
+    <result column="seo_keywords" jdbcType="NVARCHAR" property="seoKeywords" />
+    <result column="seo_description" jdbcType="NVARCHAR" property="seoDescription" />
+    <result column="zhaiyao" jdbcType="NVARCHAR" property="zhaiyao" />
+    <result column="sort_id" jdbcType="INTEGER" property="sortId" />
+    <result column="click" jdbcType="INTEGER" property="click" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="groupids_view" jdbcType="NVARCHAR" property="groupidsView" />
+    <result column="vote_id" jdbcType="INTEGER" property="voteId" />
+    <result column="is_msg" jdbcType="TINYINT" property="isMsg" />
+    <result column="is_top" jdbcType="TINYINT" property="isTop" />
+    <result column="is_red" jdbcType="TINYINT" property="isRed" />
+    <result column="is_hot" jdbcType="TINYINT" property="isHot" />
+    <result column="is_slide" jdbcType="TINYINT" property="isSlide" />
+    <result column="is_sys" jdbcType="TINYINT" property="isSys" />
+    <result column="user_name" jdbcType="NVARCHAR" property="userName" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="content" jdbcType="NVARCHAR" property="content" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sojson.datasource.common.model.DtArticle">
+    <result column="content" jdbcType="LONGNVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, channel_id, category_id, call_index, title, title_attrib, link_url, img_url, 
+    seo_title, seo_keywords, seo_description, zhaiyao, sort_id, click, status, groupids_view, 
+    vote_id, is_msg, is_top, is_red, is_hot, is_slide, is_sys, user_name, add_time, update_time,content
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.sojson.datasource.common.model.DtArticleExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dt_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.sojson.datasource.common.model.DtArticleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dt_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dt_article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dt_article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sojson.datasource.common.model.DtArticleExample">
+    delete from dt_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sojson.datasource.common.model.DtArticle">
+    insert into dt_article (id, channel_id, category_id, 
+      call_index, title, title_attrib, 
+      link_url, img_url, seo_title, 
+      seo_keywords, seo_description, zhaiyao, 
+      sort_id, click, status, 
+      groupids_view, vote_id, is_msg, 
+      is_top, is_red, is_hot, 
+      is_slide, is_sys, user_name, 
+      add_time, update_time, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{channelId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, 
+      #{callIndex,jdbcType=NVARCHAR}, #{title,jdbcType=NVARCHAR}, #{titleAttrib,jdbcType=NVARCHAR}, 
+      #{linkUrl,jdbcType=NVARCHAR}, #{imgUrl,jdbcType=NVARCHAR}, #{seoTitle,jdbcType=NVARCHAR}, 
+      #{seoKeywords,jdbcType=NVARCHAR}, #{seoDescription,jdbcType=NVARCHAR}, #{zhaiyao,jdbcType=NVARCHAR}, 
+      #{sortId,jdbcType=INTEGER}, #{click,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
+      #{groupidsView,jdbcType=NVARCHAR}, #{voteId,jdbcType=INTEGER}, #{isMsg,jdbcType=TINYINT}, 
+      #{isTop,jdbcType=TINYINT}, #{isRed,jdbcType=TINYINT}, #{isHot,jdbcType=TINYINT}, 
+      #{isSlide,jdbcType=TINYINT}, #{isSys,jdbcType=TINYINT}, #{userName,jdbcType=NVARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGNVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sojson.datasource.common.model.DtArticle">
+    insert into dt_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="channelId != null">
+        channel_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="callIndex != null">
+        call_index,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="titleAttrib != null">
+        title_attrib,
+      </if>
+      <if test="linkUrl != null">
+        link_url,
+      </if>
+      <if test="imgUrl != null">
+        img_url,
+      </if>
+      <if test="seoTitle != null">
+        seo_title,
+      </if>
+      <if test="seoKeywords != null">
+        seo_keywords,
+      </if>
+      <if test="seoDescription != null">
+        seo_description,
+      </if>
+      <if test="zhaiyao != null">
+        zhaiyao,
+      </if>
+      <if test="sortId != null">
+        sort_id,
+      </if>
+      <if test="click != null">
+        click,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="groupidsView != null">
+        groupids_view,
+      </if>
+      <if test="voteId != null">
+        vote_id,
+      </if>
+      <if test="isMsg != null">
+        is_msg,
+      </if>
+      <if test="isTop != null">
+        is_top,
+      </if>
+      <if test="isRed != null">
+        is_red,
+      </if>
+      <if test="isHot != null">
+        is_hot,
+      </if>
+      <if test="isSlide != null">
+        is_slide,
+      </if>
+      <if test="isSys != null">
+        is_sys,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="channelId != null">
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="callIndex != null">
+        #{callIndex,jdbcType=NVARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="titleAttrib != null">
+        #{titleAttrib,jdbcType=NVARCHAR},
+      </if>
+      <if test="linkUrl != null">
+        #{linkUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="seoTitle != null">
+        #{seoTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="seoKeywords != null">
+        #{seoKeywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="seoDescription != null">
+        #{seoDescription,jdbcType=NVARCHAR},
+      </if>
+      <if test="zhaiyao != null">
+        #{zhaiyao,jdbcType=NVARCHAR},
+      </if>
+      <if test="sortId != null">
+        #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="click != null">
+        #{click,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="groupidsView != null">
+        #{groupidsView,jdbcType=NVARCHAR},
+      </if>
+      <if test="voteId != null">
+        #{voteId,jdbcType=INTEGER},
+      </if>
+      <if test="isMsg != null">
+        #{isMsg,jdbcType=TINYINT},
+      </if>
+      <if test="isTop != null">
+        #{isTop,jdbcType=TINYINT},
+      </if>
+      <if test="isRed != null">
+        #{isRed,jdbcType=TINYINT},
+      </if>
+      <if test="isHot != null">
+        #{isHot,jdbcType=TINYINT},
+      </if>
+      <if test="isSlide != null">
+        #{isSlide,jdbcType=TINYINT},
+      </if>
+      <if test="isSys != null">
+        #{isSys,jdbcType=TINYINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGNVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sojson.datasource.common.model.DtArticleExample" resultType="java.lang.Long">
+    select count(*) from dt_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dt_article
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.channelId != null">
+        channel_id = #{record.channelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.callIndex != null">
+        call_index = #{record.callIndex,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.titleAttrib != null">
+        title_attrib = #{record.titleAttrib,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.linkUrl != null">
+        link_url = #{record.linkUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.imgUrl != null">
+        img_url = #{record.imgUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.seoTitle != null">
+        seo_title = #{record.seoTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.seoKeywords != null">
+        seo_keywords = #{record.seoKeywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.seoDescription != null">
+        seo_description = #{record.seoDescription,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.zhaiyao != null">
+        zhaiyao = #{record.zhaiyao,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sortId != null">
+        sort_id = #{record.sortId,jdbcType=INTEGER},
+      </if>
+      <if test="record.click != null">
+        click = #{record.click,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.groupidsView != null">
+        groupids_view = #{record.groupidsView,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.voteId != null">
+        vote_id = #{record.voteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isMsg != null">
+        is_msg = #{record.isMsg,jdbcType=TINYINT},
+      </if>
+      <if test="record.isTop != null">
+        is_top = #{record.isTop,jdbcType=TINYINT},
+      </if>
+      <if test="record.isRed != null">
+        is_red = #{record.isRed,jdbcType=TINYINT},
+      </if>
+      <if test="record.isHot != null">
+        is_hot = #{record.isHot,jdbcType=TINYINT},
+      </if>
+      <if test="record.isSlide != null">
+        is_slide = #{record.isSlide,jdbcType=TINYINT},
+      </if>
+      <if test="record.isSys != null">
+        is_sys = #{record.isSys,jdbcType=TINYINT},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.addTime != null">
+        add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGNVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update dt_article
+    set id = #{record.id,jdbcType=INTEGER},
+      channel_id = #{record.channelId,jdbcType=INTEGER},
+      category_id = #{record.categoryId,jdbcType=INTEGER},
+      call_index = #{record.callIndex,jdbcType=NVARCHAR},
+      title = #{record.title,jdbcType=NVARCHAR},
+      title_attrib = #{record.titleAttrib,jdbcType=NVARCHAR},
+      link_url = #{record.linkUrl,jdbcType=NVARCHAR},
+      img_url = #{record.imgUrl,jdbcType=NVARCHAR},
+      seo_title = #{record.seoTitle,jdbcType=NVARCHAR},
+      seo_keywords = #{record.seoKeywords,jdbcType=NVARCHAR},
+      seo_description = #{record.seoDescription,jdbcType=NVARCHAR},
+      zhaiyao = #{record.zhaiyao,jdbcType=NVARCHAR},
+      sort_id = #{record.sortId,jdbcType=INTEGER},
+      click = #{record.click,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=TINYINT},
+      groupids_view = #{record.groupidsView,jdbcType=NVARCHAR},
+      vote_id = #{record.voteId,jdbcType=INTEGER},
+      is_msg = #{record.isMsg,jdbcType=TINYINT},
+      is_top = #{record.isTop,jdbcType=TINYINT},
+      is_red = #{record.isRed,jdbcType=TINYINT},
+      is_hot = #{record.isHot,jdbcType=TINYINT},
+      is_slide = #{record.isSlide,jdbcType=TINYINT},
+      is_sys = #{record.isSys,jdbcType=TINYINT},
+      user_name = #{record.userName,jdbcType=NVARCHAR},
+      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      content = #{record.content,jdbcType=LONGNVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dt_article
+    set id = #{record.id,jdbcType=INTEGER},
+      channel_id = #{record.channelId,jdbcType=INTEGER},
+      category_id = #{record.categoryId,jdbcType=INTEGER},
+      call_index = #{record.callIndex,jdbcType=NVARCHAR},
+      title = #{record.title,jdbcType=NVARCHAR},
+      title_attrib = #{record.titleAttrib,jdbcType=NVARCHAR},
+      link_url = #{record.linkUrl,jdbcType=NVARCHAR},
+      img_url = #{record.imgUrl,jdbcType=NVARCHAR},
+      seo_title = #{record.seoTitle,jdbcType=NVARCHAR},
+      seo_keywords = #{record.seoKeywords,jdbcType=NVARCHAR},
+      seo_description = #{record.seoDescription,jdbcType=NVARCHAR},
+      zhaiyao = #{record.zhaiyao,jdbcType=NVARCHAR},
+      sort_id = #{record.sortId,jdbcType=INTEGER},
+      click = #{record.click,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=TINYINT},
+      groupids_view = #{record.groupidsView,jdbcType=NVARCHAR},
+      vote_id = #{record.voteId,jdbcType=INTEGER},
+      is_msg = #{record.isMsg,jdbcType=TINYINT},
+      is_top = #{record.isTop,jdbcType=TINYINT},
+      is_red = #{record.isRed,jdbcType=TINYINT},
+      is_hot = #{record.isHot,jdbcType=TINYINT},
+      is_slide = #{record.isSlide,jdbcType=TINYINT},
+      is_sys = #{record.isSys,jdbcType=TINYINT},
+      user_name = #{record.userName,jdbcType=NVARCHAR},
+      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sojson.datasource.common.model.DtArticle">
+    update dt_article
+    <set>
+      <if test="channelId != null">
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="callIndex != null">
+        call_index = #{callIndex,jdbcType=NVARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="titleAttrib != null">
+        title_attrib = #{titleAttrib,jdbcType=NVARCHAR},
+      </if>
+      <if test="linkUrl != null">
+        link_url = #{linkUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        img_url = #{imgUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="seoTitle != null">
+        seo_title = #{seoTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="seoKeywords != null">
+        seo_keywords = #{seoKeywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="seoDescription != null">
+        seo_description = #{seoDescription,jdbcType=NVARCHAR},
+      </if>
+      <if test="zhaiyao != null">
+        zhaiyao = #{zhaiyao,jdbcType=NVARCHAR},
+      </if>
+      <if test="sortId != null">
+        sort_id = #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="click != null">
+        click = #{click,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="groupidsView != null">
+        groupids_view = #{groupidsView,jdbcType=NVARCHAR},
+      </if>
+      <if test="voteId != null">
+        vote_id = #{voteId,jdbcType=INTEGER},
+      </if>
+      <if test="isMsg != null">
+        is_msg = #{isMsg,jdbcType=TINYINT},
+      </if>
+      <if test="isTop != null">
+        is_top = #{isTop,jdbcType=TINYINT},
+      </if>
+      <if test="isRed != null">
+        is_red = #{isRed,jdbcType=TINYINT},
+      </if>
+      <if test="isHot != null">
+        is_hot = #{isHot,jdbcType=TINYINT},
+      </if>
+      <if test="isSlide != null">
+        is_slide = #{isSlide,jdbcType=TINYINT},
+      </if>
+      <if test="isSys != null">
+        is_sys = #{isSys,jdbcType=TINYINT},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGNVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sojson.datasource.common.model.DtArticle">
+    update dt_article
+    set channel_id = #{channelId,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      call_index = #{callIndex,jdbcType=NVARCHAR},
+      title = #{title,jdbcType=NVARCHAR},
+      title_attrib = #{titleAttrib,jdbcType=NVARCHAR},
+      link_url = #{linkUrl,jdbcType=NVARCHAR},
+      img_url = #{imgUrl,jdbcType=NVARCHAR},
+      seo_title = #{seoTitle,jdbcType=NVARCHAR},
+      seo_keywords = #{seoKeywords,jdbcType=NVARCHAR},
+      seo_description = #{seoDescription,jdbcType=NVARCHAR},
+      zhaiyao = #{zhaiyao,jdbcType=NVARCHAR},
+      sort_id = #{sortId,jdbcType=INTEGER},
+      click = #{click,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      groupids_view = #{groupidsView,jdbcType=NVARCHAR},
+      vote_id = #{voteId,jdbcType=INTEGER},
+      is_msg = #{isMsg,jdbcType=TINYINT},
+      is_top = #{isTop,jdbcType=TINYINT},
+      is_red = #{isRed,jdbcType=TINYINT},
+      is_hot = #{isHot,jdbcType=TINYINT},
+      is_slide = #{isSlide,jdbcType=TINYINT},
+      is_sys = #{isSys,jdbcType=TINYINT},
+      user_name = #{userName,jdbcType=NVARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGNVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sojson.datasource.common.model.DtArticle">
+    update dt_article
+    set channel_id = #{channelId,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      call_index = #{callIndex,jdbcType=NVARCHAR},
+      title = #{title,jdbcType=NVARCHAR},
+      title_attrib = #{titleAttrib,jdbcType=NVARCHAR},
+      link_url = #{linkUrl,jdbcType=NVARCHAR},
+      img_url = #{imgUrl,jdbcType=NVARCHAR},
+      seo_title = #{seoTitle,jdbcType=NVARCHAR},
+      seo_keywords = #{seoKeywords,jdbcType=NVARCHAR},
+      seo_description = #{seoDescription,jdbcType=NVARCHAR},
+      zhaiyao = #{zhaiyao,jdbcType=NVARCHAR},
+      sort_id = #{sortId,jdbcType=INTEGER},
+      click = #{click,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      groupids_view = #{groupidsView,jdbcType=NVARCHAR},
+      vote_id = #{voteId,jdbcType=INTEGER},
+      is_msg = #{isMsg,jdbcType=TINYINT},
+      is_top = #{isTop,jdbcType=TINYINT},
+      is_red = #{isRed,jdbcType=TINYINT},
+      is_hot = #{isHot,jdbcType=TINYINT},
+      is_slide = #{isSlide,jdbcType=TINYINT},
+      is_sys = #{isSys,jdbcType=TINYINT},
+      user_name = #{userName,jdbcType=NVARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

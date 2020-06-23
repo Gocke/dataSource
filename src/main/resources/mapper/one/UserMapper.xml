@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sojson.datasource.one.mapper.UserMapper">
+    <select id="selectAll" resultType="com.sojson.datasource.common.model.WysAdminTable">
+       SELECT
+       '' adminType,
+       [user] adminId,
+       pas adminPass ,
+       [真实姓名] adminName,
+        CASE [性别]
+          WHEN '男' THEN '0'
+          ELSE '1'
+       END adminSex,
+       [电话] adminTel,
+       [手机] adminMobile,
+       [email] adminEmail,
+       [qq] adminQq,
+       '' adminMsn,
+       '' adminTaobao,
+       [自我介绍] adminIntroduction,
+       [登录次数] adminLogin,
+       [IP] admin_modifyIp,
+       [注册日期] adminModify_date,
+       [注册日期] adminRegister_date,
+       [注册日期] adminApproval_date,
+       '1' adminOk,
+       '0' adminOp,
+       '1' adminIssueok,
+       '0' adminGroup,
+       dwmc companyname,
+       [地区] companyaddress,
+       [校区] companyfax,
+       '3' usertype,
+       '0' cookie,
+       '' adminShortcut,
+       'cn' lang,
+       '' langok FROM user1 WHERE [USER] IS NOT NULL
+    </select>
+</mapper>

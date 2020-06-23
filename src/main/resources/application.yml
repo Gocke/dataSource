@@ -1,0 +1,33 @@
+server:
+  port: 9281
+
+#spring:
+#  profiles:
+#    active: dev
+
+
+
+
+
+
+
+
+datasource1:
+  url: jdbc:sqlserver://119.23.235.185:1433;DatabaseName=sq_huaitaiedy
+  username: sa
+  password: Ht13622335566
+  driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+#datasource2:
+#  url: jdbc:mysql://localhost:3310/huataiedu?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+#  username: root
+#  password: 123456
+#  driver-class-name: com.mysql.jdbc.Driver
+
+
+datasource2:
+  url: jdbc:mysql://localhost:3306/xmxfdcom?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+  username: huatai
+  password: IvkjrNg!6ZkaVYNT
+  driver-class-name: com.mysql.jdbc.Driver
+

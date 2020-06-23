@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sojson.datasource.two.mapper.WysColumnMapper" >
+  <resultMap id="BaseResultMap" type="com.sojson.datasource.common.model.WysColumn" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="foldername" property="foldername" jdbcType="VARCHAR" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="bigclass" property="bigclass" jdbcType="INTEGER" />
+    <result column="samefile" property="samefile" jdbcType="INTEGER" />
+    <result column="module" property="module" jdbcType="INTEGER" />
+    <result column="no_order" property="noOrder" jdbcType="INTEGER" />
+    <result column="wap_ok" property="wapOk" jdbcType="INTEGER" />
+    <result column="if_in" property="ifIn" jdbcType="INTEGER" />
+    <result column="nav" property="nav" jdbcType="INTEGER" />
+    <result column="ctitle" property="ctitle" jdbcType="VARCHAR" />
+    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="list_order" property="listOrder" jdbcType="INTEGER" />
+    <result column="new_windows" property="newWindows" jdbcType="VARCHAR" />
+    <result column="classtype" property="classtype" jdbcType="INTEGER" />
+    <result column="out_url" property="outUrl" jdbcType="VARCHAR" />
+    <result column="index_num" property="indexNum" jdbcType="INTEGER" />
+    <result column="access" property="access" jdbcType="INTEGER" />
+    <result column="indeximg" property="indeximg" jdbcType="VARCHAR" />
+    <result column="columnimg" property="columnimg" jdbcType="VARCHAR" />
+    <result column="isshow" property="isshow" jdbcType="INTEGER" />
+    <result column="lang" property="lang" jdbcType="VARCHAR" />
+    <result column="namemark" property="namemark" jdbcType="VARCHAR" />
+    <result column="releclass" property="releclass" jdbcType="INTEGER" />
+    <result column="content1" property="content1" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sojson.datasource.common.model.WysColumn" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, foldername, filename, bigclass, samefile, module, no_order, wap_ok, if_in, 
+    nav, ctitle, keywords, description, list_order, new_windows, classtype, out_url, 
+    index_num, access, indeximg, columnimg, isshow, lang, namemark, releclass, content1
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sojson.datasource.common.model.WysColumnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wys_column
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sojson.datasource.common.model.WysColumnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from wys_column
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wys_column
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wys_column
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sojson.datasource.common.model.WysColumnExample" >
+    delete from wys_column
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sojson.datasource.common.model.WysColumn" >
+    insert into wys_column (id, name, foldername, 
+      filename, bigclass, samefile, 
+      module, no_order, wap_ok, 
+      if_in, nav, ctitle, 
+      keywords, description, list_order, 
+      new_windows, classtype, out_url, 
+      index_num, access, indeximg, 
+      columnimg, isshow, lang, 
+      namemark, releclass, content1, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{foldername,jdbcType=VARCHAR}, 
+      #{filename,jdbcType=VARCHAR}, #{bigclass,jdbcType=INTEGER}, #{samefile,jdbcType=INTEGER}, 
+      #{module,jdbcType=INTEGER}, #{noOrder,jdbcType=INTEGER}, #{wapOk,jdbcType=INTEGER}, 
+      #{ifIn,jdbcType=INTEGER}, #{nav,jdbcType=INTEGER}, #{ctitle,jdbcType=VARCHAR}, 
+      #{keywords,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{listOrder,jdbcType=INTEGER}, 
+      #{newWindows,jdbcType=VARCHAR}, #{classtype,jdbcType=INTEGER}, #{outUrl,jdbcType=VARCHAR}, 
+      #{indexNum,jdbcType=INTEGER}, #{access,jdbcType=INTEGER}, #{indeximg,jdbcType=VARCHAR}, 
+      #{columnimg,jdbcType=VARCHAR}, #{isshow,jdbcType=INTEGER}, #{lang,jdbcType=VARCHAR}, 
+      #{namemark,jdbcType=VARCHAR}, #{releclass,jdbcType=INTEGER}, #{content1,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sojson.datasource.common.model.WysColumn" >
+    insert into wys_column
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="foldername != null" >
+        foldername,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="bigclass != null" >
+        bigclass,
+      </if>
+      <if test="samefile != null" >
+        samefile,
+      </if>
+      <if test="module != null" >
+        module,
+      </if>
+      <if test="noOrder != null" >
+        no_order,
+      </if>
+      <if test="wapOk != null" >
+        wap_ok,
+      </if>
+      <if test="ifIn != null" >
+        if_in,
+      </if>
+      <if test="nav != null" >
+        nav,
+      </if>
+      <if test="ctitle != null" >
+        ctitle,
+      </if>
+      <if test="keywords != null" >
+        keywords,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="listOrder != null" >
+        list_order,
+      </if>
+      <if test="newWindows != null" >
+        new_windows,
+      </if>
+      <if test="classtype != null" >
+        classtype,
+      </if>
+      <if test="outUrl != null" >
+        out_url,
+      </if>
+      <if test="indexNum != null" >
+        index_num,
+      </if>
+      <if test="access != null" >
+        access,
+      </if>
+      <if test="indeximg != null" >
+        indeximg,
+      </if>
+      <if test="columnimg != null" >
+        columnimg,
+      </if>
+      <if test="isshow != null" >
+        isshow,
+      </if>
+      <if test="lang != null" >
+        lang,
+      </if>
+      <if test="namemark != null" >
+        namemark,
+      </if>
+      <if test="releclass != null" >
+        releclass,
+      </if>
+      <if test="content1 != null" >
+        content1,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="foldername != null" >
+        #{foldername,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="bigclass != null" >
+        #{bigclass,jdbcType=INTEGER},
+      </if>
+      <if test="samefile != null" >
+        #{samefile,jdbcType=INTEGER},
+      </if>
+      <if test="module != null" >
+        #{module,jdbcType=INTEGER},
+      </if>
+      <if test="noOrder != null" >
+        #{noOrder,jdbcType=INTEGER},
+      </if>
+      <if test="wapOk != null" >
+        #{wapOk,jdbcType=INTEGER},
+      </if>
+      <if test="ifIn != null" >
+        #{ifIn,jdbcType=INTEGER},
+      </if>
+      <if test="nav != null" >
+        #{nav,jdbcType=INTEGER},
+      </if>
+      <if test="ctitle != null" >
+        #{ctitle,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="listOrder != null" >
+        #{listOrder,jdbcType=INTEGER},
+      </if>
+      <if test="newWindows != null" >
+        #{newWindows,jdbcType=VARCHAR},
+      </if>
+      <if test="classtype != null" >
+        #{classtype,jdbcType=INTEGER},
+      </if>
+      <if test="outUrl != null" >
+        #{outUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="indexNum != null" >
+        #{indexNum,jdbcType=INTEGER},
+      </if>
+      <if test="access != null" >
+        #{access,jdbcType=INTEGER},
+      </if>
+      <if test="indeximg != null" >
+        #{indeximg,jdbcType=VARCHAR},
+      </if>
+      <if test="columnimg != null" >
+        #{columnimg,jdbcType=VARCHAR},
+      </if>
+      <if test="isshow != null" >
+        #{isshow,jdbcType=INTEGER},
+      </if>
+      <if test="lang != null" >
+        #{lang,jdbcType=VARCHAR},
+      </if>
+      <if test="namemark != null" >
+        #{namemark,jdbcType=VARCHAR},
+      </if>
+      <if test="releclass != null" >
+        #{releclass,jdbcType=INTEGER},
+      </if>
+      <if test="content1 != null" >
+        #{content1,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sojson.datasource.common.model.WysColumnExample" resultType="java.lang.Integer" >
+    select count(*) from wys_column
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wys_column
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.foldername != null" >
+        foldername = #{record.foldername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filename != null" >
+        filename = #{record.filename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigclass != null" >
+        bigclass = #{record.bigclass,jdbcType=INTEGER},
+      </if>
+      <if test="record.samefile != null" >
+        samefile = #{record.samefile,jdbcType=INTEGER},
+      </if>
+      <if test="record.module != null" >
+        module = #{record.module,jdbcType=INTEGER},
+      </if>
+      <if test="record.noOrder != null" >
+        no_order = #{record.noOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.wapOk != null" >
+        wap_ok = #{record.wapOk,jdbcType=INTEGER},
+      </if>
+      <if test="record.ifIn != null" >
+        if_in = #{record.ifIn,jdbcType=INTEGER},
+      </if>
+      <if test="record.nav != null" >
+        nav = #{record.nav,jdbcType=INTEGER},
+      </if>
+      <if test="record.ctitle != null" >
+        ctitle = #{record.ctitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keywords != null" >
+        keywords = #{record.keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.listOrder != null" >
+        list_order = #{record.listOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.newWindows != null" >
+        new_windows = #{record.newWindows,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classtype != null" >
+        classtype = #{record.classtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.outUrl != null" >
+        out_url = #{record.outUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indexNum != null" >
+        index_num = #{record.indexNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.access != null" >
+        access = #{record.access,jdbcType=INTEGER},
+      </if>
+      <if test="record.indeximg != null" >
+        indeximg = #{record.indeximg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columnimg != null" >
+        columnimg = #{record.columnimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isshow != null" >
+        isshow = #{record.isshow,jdbcType=INTEGER},
+      </if>
+      <if test="record.lang != null" >
+        lang = #{record.lang,jdbcType=VARCHAR},
+      </if>
+      <if test="record.namemark != null" >
+        namemark = #{record.namemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releclass != null" >
+        releclass = #{record.releclass,jdbcType=INTEGER},
+      </if>
+      <if test="record.content1 != null" >
+        content1 = #{record.content1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update wys_column
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      foldername = #{record.foldername,jdbcType=VARCHAR},
+      filename = #{record.filename,jdbcType=VARCHAR},
+      bigclass = #{record.bigclass,jdbcType=INTEGER},
+      samefile = #{record.samefile,jdbcType=INTEGER},
+      module = #{record.module,jdbcType=INTEGER},
+      no_order = #{record.noOrder,jdbcType=INTEGER},
+      wap_ok = #{record.wapOk,jdbcType=INTEGER},
+      if_in = #{record.ifIn,jdbcType=INTEGER},
+      nav = #{record.nav,jdbcType=INTEGER},
+      ctitle = #{record.ctitle,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      list_order = #{record.listOrder,jdbcType=INTEGER},
+      new_windows = #{record.newWindows,jdbcType=VARCHAR},
+      classtype = #{record.classtype,jdbcType=INTEGER},
+      out_url = #{record.outUrl,jdbcType=VARCHAR},
+      index_num = #{record.indexNum,jdbcType=INTEGER},
+      access = #{record.access,jdbcType=INTEGER},
+      indeximg = #{record.indeximg,jdbcType=VARCHAR},
+      columnimg = #{record.columnimg,jdbcType=VARCHAR},
+      isshow = #{record.isshow,jdbcType=INTEGER},
+      lang = #{record.lang,jdbcType=VARCHAR},
+      namemark = #{record.namemark,jdbcType=VARCHAR},
+      releclass = #{record.releclass,jdbcType=INTEGER},
+      content1 = #{record.content1,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wys_column
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      foldername = #{record.foldername,jdbcType=VARCHAR},
+      filename = #{record.filename,jdbcType=VARCHAR},
+      bigclass = #{record.bigclass,jdbcType=INTEGER},
+      samefile = #{record.samefile,jdbcType=INTEGER},
+      module = #{record.module,jdbcType=INTEGER},
+      no_order = #{record.noOrder,jdbcType=INTEGER},
+      wap_ok = #{record.wapOk,jdbcType=INTEGER},
+      if_in = #{record.ifIn,jdbcType=INTEGER},
+      nav = #{record.nav,jdbcType=INTEGER},
+      ctitle = #{record.ctitle,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      list_order = #{record.listOrder,jdbcType=INTEGER},
+      new_windows = #{record.newWindows,jdbcType=VARCHAR},
+      classtype = #{record.classtype,jdbcType=INTEGER},
+      out_url = #{record.outUrl,jdbcType=VARCHAR},
+      index_num = #{record.indexNum,jdbcType=INTEGER},
+      access = #{record.access,jdbcType=INTEGER},
+      indeximg = #{record.indeximg,jdbcType=VARCHAR},
+      columnimg = #{record.columnimg,jdbcType=VARCHAR},
+      isshow = #{record.isshow,jdbcType=INTEGER},
+      lang = #{record.lang,jdbcType=VARCHAR},
+      namemark = #{record.namemark,jdbcType=VARCHAR},
+      releclass = #{record.releclass,jdbcType=INTEGER},
+      content1 = #{record.content1,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sojson.datasource.common.model.WysColumn" >
+    update wys_column
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="foldername != null" >
+        foldername = #{foldername,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="bigclass != null" >
+        bigclass = #{bigclass,jdbcType=INTEGER},
+      </if>
+      <if test="samefile != null" >
+        samefile = #{samefile,jdbcType=INTEGER},
+      </if>
+      <if test="module != null" >
+        module = #{module,jdbcType=INTEGER},
+      </if>
+      <if test="noOrder != null" >
+        no_order = #{noOrder,jdbcType=INTEGER},
+      </if>
+      <if test="wapOk != null" >
+        wap_ok = #{wapOk,jdbcType=INTEGER},
+      </if>
+      <if test="ifIn != null" >
+        if_in = #{ifIn,jdbcType=INTEGER},
+      </if>
+      <if test="nav != null" >
+        nav = #{nav,jdbcType=INTEGER},
+      </if>
+      <if test="ctitle != null" >
+        ctitle = #{ctitle,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="listOrder != null" >
+        list_order = #{listOrder,jdbcType=INTEGER},
+      </if>
+      <if test="newWindows != null" >
+        new_windows = #{newWindows,jdbcType=VARCHAR},
+      </if>
+      <if test="classtype != null" >
+        classtype = #{classtype,jdbcType=INTEGER},
+      </if>
+      <if test="outUrl != null" >
+        out_url = #{outUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="indexNum != null" >
+        index_num = #{indexNum,jdbcType=INTEGER},
+      </if>
+      <if test="access != null" >
+        access = #{access,jdbcType=INTEGER},
+      </if>
+      <if test="indeximg != null" >
+        indeximg = #{indeximg,jdbcType=VARCHAR},
+      </if>
+      <if test="columnimg != null" >
+        columnimg = #{columnimg,jdbcType=VARCHAR},
+      </if>
+      <if test="isshow != null" >
+        isshow = #{isshow,jdbcType=INTEGER},
+      </if>
+      <if test="lang != null" >
+        lang = #{lang,jdbcType=VARCHAR},
+      </if>
+      <if test="namemark != null" >
+        namemark = #{namemark,jdbcType=VARCHAR},
+      </if>
+      <if test="releclass != null" >
+        releclass = #{releclass,jdbcType=INTEGER},
+      </if>
+      <if test="content1 != null" >
+        content1 = #{content1,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sojson.datasource.common.model.WysColumn" >
+    update wys_column
+    set name = #{name,jdbcType=VARCHAR},
+      foldername = #{foldername,jdbcType=VARCHAR},
+      filename = #{filename,jdbcType=VARCHAR},
+      bigclass = #{bigclass,jdbcType=INTEGER},
+      samefile = #{samefile,jdbcType=INTEGER},
+      module = #{module,jdbcType=INTEGER},
+      no_order = #{noOrder,jdbcType=INTEGER},
+      wap_ok = #{wapOk,jdbcType=INTEGER},
+      if_in = #{ifIn,jdbcType=INTEGER},
+      nav = #{nav,jdbcType=INTEGER},
+      ctitle = #{ctitle,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      list_order = #{listOrder,jdbcType=INTEGER},
+      new_windows = #{newWindows,jdbcType=VARCHAR},
+      classtype = #{classtype,jdbcType=INTEGER},
+      out_url = #{outUrl,jdbcType=VARCHAR},
+      index_num = #{indexNum,jdbcType=INTEGER},
+      access = #{access,jdbcType=INTEGER},
+      indeximg = #{indeximg,jdbcType=VARCHAR},
+      columnimg = #{columnimg,jdbcType=VARCHAR},
+      isshow = #{isshow,jdbcType=INTEGER},
+      lang = #{lang,jdbcType=VARCHAR},
+      namemark = #{namemark,jdbcType=VARCHAR},
+      releclass = #{releclass,jdbcType=INTEGER},
+      content1 = #{content1,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sojson.datasource.common.model.WysColumn" >
+    update wys_column
+    set name = #{name,jdbcType=VARCHAR},
+      foldername = #{foldername,jdbcType=VARCHAR},
+      filename = #{filename,jdbcType=VARCHAR},
+      bigclass = #{bigclass,jdbcType=INTEGER},
+      samefile = #{samefile,jdbcType=INTEGER},
+      module = #{module,jdbcType=INTEGER},
+      no_order = #{noOrder,jdbcType=INTEGER},
+      wap_ok = #{wapOk,jdbcType=INTEGER},
+      if_in = #{ifIn,jdbcType=INTEGER},
+      nav = #{nav,jdbcType=INTEGER},
+      ctitle = #{ctitle,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      list_order = #{listOrder,jdbcType=INTEGER},
+      new_windows = #{newWindows,jdbcType=VARCHAR},
+      classtype = #{classtype,jdbcType=INTEGER},
+      out_url = #{outUrl,jdbcType=VARCHAR},
+      index_num = #{indexNum,jdbcType=INTEGER},
+      access = #{access,jdbcType=INTEGER},
+      indeximg = #{indeximg,jdbcType=VARCHAR},
+      columnimg = #{columnimg,jdbcType=VARCHAR},
+      isshow = #{isshow,jdbcType=INTEGER},
+      lang = #{lang,jdbcType=VARCHAR},
+      namemark = #{namemark,jdbcType=VARCHAR},
+      releclass = #{releclass,jdbcType=INTEGER},
+      content1 = #{content1,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

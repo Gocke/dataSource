@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sojson.datasource.two.mapper.WysNewsMapper" >
+  <resultMap id="BaseResultMap" type="com.sojson.datasource.common.model.WysNews" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="ctitle" property="ctitle" jdbcType="VARCHAR" />
+    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="class1" property="class1" jdbcType="INTEGER" />
+    <result column="class2" property="class2" jdbcType="INTEGER" />
+    <result column="class3" property="class3" jdbcType="INTEGER" />
+    <result column="no_order" property="noOrder" jdbcType="INTEGER" />
+    <result column="wap_ok" property="wapOk" jdbcType="INTEGER" />
+    <result column="img_ok" property="imgOk" jdbcType="INTEGER" />
+    <result column="imgurl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="imgurls" property="imgurls" jdbcType="VARCHAR" />
+    <result column="com_ok" property="comOk" jdbcType="INTEGER" />
+    <result column="issue" property="issue" jdbcType="VARCHAR" />
+    <result column="hits" property="hits" jdbcType="INTEGER" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="access" property="access" jdbcType="INTEGER" />
+    <result column="top_ok" property="topOk" jdbcType="INTEGER" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="lang" property="lang" jdbcType="VARCHAR" />
+    <result column="recycle" property="recycle" jdbcType="INTEGER" />
+    <result column="displaytype" property="displaytype" jdbcType="INTEGER" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sojson.datasource.common.model.WysNews" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, ctitle, keywords, description, class1, class2, class3, no_order, wap_ok, 
+    img_ok, imgurl, imgurls, com_ok, issue, hits, updatetime, addtime, access, top_ok, 
+    filename, lang, recycle, displaytype, tag
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sojson.datasource.common.model.WysNewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wys_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sojson.datasource.common.model.WysNewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from wys_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wys_news
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wys_news
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sojson.datasource.common.model.WysNewsExample" >
+    delete from wys_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sojson.datasource.common.model.WysNews" >
+    insert into wys_news (id, title, ctitle, 
+      keywords, description, class1, 
+      class2, class3, no_order, 
+      wap_ok, img_ok, imgurl, 
+      imgurls, com_ok, issue, 
+      hits, updatetime, addtime, 
+      access, top_ok, filename, 
+      lang, recycle, displaytype, 
+      tag, content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{ctitle,jdbcType=VARCHAR}, 
+      #{keywords,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{class1,jdbcType=INTEGER}, 
+      #{class2,jdbcType=INTEGER}, #{class3,jdbcType=INTEGER}, #{noOrder,jdbcType=INTEGER}, 
+      #{wapOk,jdbcType=INTEGER}, #{imgOk,jdbcType=INTEGER}, #{imgurl,jdbcType=VARCHAR}, 
+      #{imgurls,jdbcType=VARCHAR}, #{comOk,jdbcType=INTEGER}, #{issue,jdbcType=VARCHAR}, 
+      #{hits,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{access,jdbcType=INTEGER}, #{topOk,jdbcType=INTEGER}, #{filename,jdbcType=VARCHAR}, 
+      #{lang,jdbcType=VARCHAR}, #{recycle,jdbcType=INTEGER}, #{displaytype,jdbcType=INTEGER}, 
+      #{tag,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sojson.datasource.common.model.WysNews" >
+    insert into wys_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="ctitle != null" >
+        ctitle,
+      </if>
+      <if test="keywords != null" >
+        keywords,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="class1 != null" >
+        class1,
+      </if>
+      <if test="class2 != null" >
+        class2,
+      </if>
+      <if test="class3 != null" >
+        class3,
+      </if>
+      <if test="noOrder != null" >
+        no_order,
+      </if>
+      <if test="wapOk != null" >
+        wap_ok,
+      </if>
+      <if test="imgOk != null" >
+        img_ok,
+      </if>
+      <if test="imgurl != null" >
+        imgurl,
+      </if>
+      <if test="imgurls != null" >
+        imgurls,
+      </if>
+      <if test="comOk != null" >
+        com_ok,
+      </if>
+      <if test="issue != null" >
+        issue,
+      </if>
+      <if test="hits != null" >
+        hits,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="access != null" >
+        access,
+      </if>
+      <if test="topOk != null" >
+        top_ok,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="lang != null" >
+        lang,
+      </if>
+      <if test="recycle != null" >
+        recycle,
+      </if>
+      <if test="displaytype != null" >
+        displaytype,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="ctitle != null" >
+        #{ctitle,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="class1 != null" >
+        #{class1,jdbcType=INTEGER},
+      </if>
+      <if test="class2 != null" >
+        #{class2,jdbcType=INTEGER},
+      </if>
+      <if test="class3 != null" >
+        #{class3,jdbcType=INTEGER},
+      </if>
+      <if test="noOrder != null" >
+        #{noOrder,jdbcType=INTEGER},
+      </if>
+      <if test="wapOk != null" >
+        #{wapOk,jdbcType=INTEGER},
+      </if>
+      <if test="imgOk != null" >
+        #{imgOk,jdbcType=INTEGER},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurls != null" >
+        #{imgurls,jdbcType=VARCHAR},
+      </if>
+      <if test="comOk != null" >
+        #{comOk,jdbcType=INTEGER},
+      </if>
+      <if test="issue != null" >
+        #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="hits != null" >
+        #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="access != null" >
+        #{access,jdbcType=INTEGER},
+      </if>
+      <if test="topOk != null" >
+        #{topOk,jdbcType=INTEGER},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="lang != null" >
+        #{lang,jdbcType=VARCHAR},
+      </if>
+      <if test="recycle != null" >
+        #{recycle,jdbcType=INTEGER},
+      </if>
+      <if test="displaytype != null" >
+        #{displaytype,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sojson.datasource.common.model.WysNewsExample" resultType="java.lang.Integer" >
+    select count(*) from wys_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wys_news
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctitle != null" >
+        ctitle = #{record.ctitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keywords != null" >
+        keywords = #{record.keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.class1 != null" >
+        class1 = #{record.class1,jdbcType=INTEGER},
+      </if>
+      <if test="record.class2 != null" >
+        class2 = #{record.class2,jdbcType=INTEGER},
+      </if>
+      <if test="record.class3 != null" >
+        class3 = #{record.class3,jdbcType=INTEGER},
+      </if>
+      <if test="record.noOrder != null" >
+        no_order = #{record.noOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.wapOk != null" >
+        wap_ok = #{record.wapOk,jdbcType=INTEGER},
+      </if>
+      <if test="record.imgOk != null" >
+        img_ok = #{record.imgOk,jdbcType=INTEGER},
+      </if>
+      <if test="record.imgurl != null" >
+        imgurl = #{record.imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgurls != null" >
+        imgurls = #{record.imgurls,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comOk != null" >
+        com_ok = #{record.comOk,jdbcType=INTEGER},
+      </if>
+      <if test="record.issue != null" >
+        issue = #{record.issue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hits != null" >
+        hits = #{record.hits,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.addtime != null" >
+        addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.access != null" >
+        access = #{record.access,jdbcType=INTEGER},
+      </if>
+      <if test="record.topOk != null" >
+        top_ok = #{record.topOk,jdbcType=INTEGER},
+      </if>
+      <if test="record.filename != null" >
+        filename = #{record.filename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lang != null" >
+        lang = #{record.lang,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recycle != null" >
+        recycle = #{record.recycle,jdbcType=INTEGER},
+      </if>
+      <if test="record.displaytype != null" >
+        displaytype = #{record.displaytype,jdbcType=INTEGER},
+      </if>
+      <if test="record.tag != null" >
+        tag = #{record.tag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update wys_news
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      ctitle = #{record.ctitle,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      class1 = #{record.class1,jdbcType=INTEGER},
+      class2 = #{record.class2,jdbcType=INTEGER},
+      class3 = #{record.class3,jdbcType=INTEGER},
+      no_order = #{record.noOrder,jdbcType=INTEGER},
+      wap_ok = #{record.wapOk,jdbcType=INTEGER},
+      img_ok = #{record.imgOk,jdbcType=INTEGER},
+      imgurl = #{record.imgurl,jdbcType=VARCHAR},
+      imgurls = #{record.imgurls,jdbcType=VARCHAR},
+      com_ok = #{record.comOk,jdbcType=INTEGER},
+      issue = #{record.issue,jdbcType=VARCHAR},
+      hits = #{record.hits,jdbcType=INTEGER},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      access = #{record.access,jdbcType=INTEGER},
+      top_ok = #{record.topOk,jdbcType=INTEGER},
+      filename = #{record.filename,jdbcType=VARCHAR},
+      lang = #{record.lang,jdbcType=VARCHAR},
+      recycle = #{record.recycle,jdbcType=INTEGER},
+      displaytype = #{record.displaytype,jdbcType=INTEGER},
+      tag = #{record.tag,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wys_news
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      ctitle = #{record.ctitle,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      class1 = #{record.class1,jdbcType=INTEGER},
+      class2 = #{record.class2,jdbcType=INTEGER},
+      class3 = #{record.class3,jdbcType=INTEGER},
+      no_order = #{record.noOrder,jdbcType=INTEGER},
+      wap_ok = #{record.wapOk,jdbcType=INTEGER},
+      img_ok = #{record.imgOk,jdbcType=INTEGER},
+      imgurl = #{record.imgurl,jdbcType=VARCHAR},
+      imgurls = #{record.imgurls,jdbcType=VARCHAR},
+      com_ok = #{record.comOk,jdbcType=INTEGER},
+      issue = #{record.issue,jdbcType=VARCHAR},
+      hits = #{record.hits,jdbcType=INTEGER},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      access = #{record.access,jdbcType=INTEGER},
+      top_ok = #{record.topOk,jdbcType=INTEGER},
+      filename = #{record.filename,jdbcType=VARCHAR},
+      lang = #{record.lang,jdbcType=VARCHAR},
+      recycle = #{record.recycle,jdbcType=INTEGER},
+      displaytype = #{record.displaytype,jdbcType=INTEGER},
+      tag = #{record.tag,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sojson.datasource.common.model.WysNews" >
+    update wys_news
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="ctitle != null" >
+        ctitle = #{ctitle,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="class1 != null" >
+        class1 = #{class1,jdbcType=INTEGER},
+      </if>
+      <if test="class2 != null" >
+        class2 = #{class2,jdbcType=INTEGER},
+      </if>
+      <if test="class3 != null" >
+        class3 = #{class3,jdbcType=INTEGER},
+      </if>
+      <if test="noOrder != null" >
+        no_order = #{noOrder,jdbcType=INTEGER},
+      </if>
+      <if test="wapOk != null" >
+        wap_ok = #{wapOk,jdbcType=INTEGER},
+      </if>
+      <if test="imgOk != null" >
+        img_ok = #{imgOk,jdbcType=INTEGER},
+      </if>
+      <if test="imgurl != null" >
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurls != null" >
+        imgurls = #{imgurls,jdbcType=VARCHAR},
+      </if>
+      <if test="comOk != null" >
+        com_ok = #{comOk,jdbcType=INTEGER},
+      </if>
+      <if test="issue != null" >
+        issue = #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="hits != null" >
+        hits = #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="access != null" >
+        access = #{access,jdbcType=INTEGER},
+      </if>
+      <if test="topOk != null" >
+        top_ok = #{topOk,jdbcType=INTEGER},
+      </if>
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="lang != null" >
+        lang = #{lang,jdbcType=VARCHAR},
+      </if>
+      <if test="recycle != null" >
+        recycle = #{recycle,jdbcType=INTEGER},
+      </if>
+      <if test="displaytype != null" >
+        displaytype = #{displaytype,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sojson.datasource.common.model.WysNews" >
+    update wys_news
+    set title = #{title,jdbcType=VARCHAR},
+      ctitle = #{ctitle,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      class1 = #{class1,jdbcType=INTEGER},
+      class2 = #{class2,jdbcType=INTEGER},
+      class3 = #{class3,jdbcType=INTEGER},
+      no_order = #{noOrder,jdbcType=INTEGER},
+      wap_ok = #{wapOk,jdbcType=INTEGER},
+      img_ok = #{imgOk,jdbcType=INTEGER},
+      imgurl = #{imgurl,jdbcType=VARCHAR},
+      imgurls = #{imgurls,jdbcType=VARCHAR},
+      com_ok = #{comOk,jdbcType=INTEGER},
+      issue = #{issue,jdbcType=VARCHAR},
+      hits = #{hits,jdbcType=INTEGER},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      access = #{access,jdbcType=INTEGER},
+      top_ok = #{topOk,jdbcType=INTEGER},
+      filename = #{filename,jdbcType=VARCHAR},
+      lang = #{lang,jdbcType=VARCHAR},
+      recycle = #{recycle,jdbcType=INTEGER},
+      displaytype = #{displaytype,jdbcType=INTEGER},
+      tag = #{tag,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sojson.datasource.common.model.WysNews" >
+    update wys_news
+    set title = #{title,jdbcType=VARCHAR},
+      ctitle = #{ctitle,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      class1 = #{class1,jdbcType=INTEGER},
+      class2 = #{class2,jdbcType=INTEGER},
+      class3 = #{class3,jdbcType=INTEGER},
+      no_order = #{noOrder,jdbcType=INTEGER},
+      wap_ok = #{wapOk,jdbcType=INTEGER},
+      img_ok = #{imgOk,jdbcType=INTEGER},
+      imgurl = #{imgurl,jdbcType=VARCHAR},
+      imgurls = #{imgurls,jdbcType=VARCHAR},
+      com_ok = #{comOk,jdbcType=INTEGER},
+      issue = #{issue,jdbcType=VARCHAR},
+      hits = #{hits,jdbcType=INTEGER},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      access = #{access,jdbcType=INTEGER},
+      top_ok = #{topOk,jdbcType=INTEGER},
+      filename = #{filename,jdbcType=VARCHAR},
+      lang = #{lang,jdbcType=VARCHAR},
+      recycle = #{recycle,jdbcType=INTEGER},
+      displaytype = #{displaytype,jdbcType=INTEGER},
+      tag = #{tag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

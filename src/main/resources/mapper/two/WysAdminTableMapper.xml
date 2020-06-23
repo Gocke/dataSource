@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sojson.datasource.two.mapper.WysAdminTableMapper" >
+  <resultMap id="BaseResultMap" type="com.sojson.datasource.common.model.WysAdminTable" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="admin_type" property="adminType" jdbcType="VARCHAR" />
+    <result column="admin_id" property="adminId" jdbcType="CHAR" />
+    <result column="admin_pass" property="adminPass" jdbcType="CHAR" />
+    <result column="admin_name" property="adminName" jdbcType="VARCHAR" />
+    <result column="admin_sex" property="adminSex" jdbcType="BIT" />
+    <result column="admin_tel" property="adminTel" jdbcType="VARCHAR" />
+    <result column="admin_mobile" property="adminMobile" jdbcType="VARCHAR" />
+    <result column="admin_email" property="adminEmail" jdbcType="VARCHAR" />
+    <result column="admin_qq" property="adminQq" jdbcType="VARCHAR" />
+    <result column="admin_msn" property="adminMsn" jdbcType="VARCHAR" />
+    <result column="admin_taobao" property="adminTaobao" jdbcType="VARCHAR" />
+    <result column="admin_introduction" property="adminIntroduction" jdbcType="VARCHAR" />
+    <result column="admin_login" property="adminLogin" jdbcType="INTEGER" />
+    <result column="admin_modify_ip" property="adminModifyIp" jdbcType="VARCHAR" />
+    <result column="admin_modify_date" property="adminModifyDate" jdbcType="TIMESTAMP" />
+    <result column="admin_register_date" property="adminRegisterDate" jdbcType="TIMESTAMP" />
+    <result column="admin_approval_date" property="adminApprovalDate" jdbcType="TIMESTAMP" />
+    <result column="admin_ok" property="adminOk" jdbcType="INTEGER" />
+    <result column="admin_op" property="adminOp" jdbcType="VARCHAR" />
+    <result column="admin_issueok" property="adminIssueok" jdbcType="INTEGER" />
+    <result column="admin_group" property="adminGroup" jdbcType="INTEGER" />
+    <result column="companyname" property="companyname" jdbcType="VARCHAR" />
+    <result column="companyaddress" property="companyaddress" jdbcType="VARCHAR" />
+    <result column="companyfax" property="companyfax" jdbcType="VARCHAR" />
+    <result column="usertype" property="usertype" jdbcType="INTEGER" />
+    <result column="checkid" property="checkid" jdbcType="INTEGER" />
+    <result column="companycode" property="companycode" jdbcType="VARCHAR" />
+    <result column="companywebsite" property="companywebsite" jdbcType="VARCHAR" />
+    <result column="cookie" property="cookie" jdbcType="VARCHAR" />
+    <result column="admin_shortcut" property="adminShortcut" jdbcType="VARCHAR" />
+    <result column="lang" property="lang" jdbcType="VARCHAR" />
+    <result column="langok" property="langok" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, admin_type, admin_id, admin_pass, admin_name, admin_sex, admin_tel, admin_mobile, 
+    admin_email, admin_qq, admin_msn, admin_taobao, admin_introduction, admin_login, 
+    admin_modify_ip, admin_modify_date, admin_register_date, admin_approval_date, admin_ok, 
+    admin_op, admin_issueok, admin_group, companyname, companyaddress, companyfax, usertype, 
+    checkid, companycode, companywebsite, cookie, admin_shortcut, lang, langok
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sojson.datasource.common.model.WysAdminTableExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from wys_admin_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.sojson.datasource.common.model.WysAdminTableExample" >
+    delete from wys_admin_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sojson.datasource.common.model.WysAdminTable" >
+    insert into wys_admin_table (id, admin_type, admin_id, 
+      admin_pass, admin_name, admin_sex, 
+      admin_tel, admin_mobile, admin_email, 
+      admin_qq, admin_msn, admin_taobao, 
+      admin_introduction, admin_login, admin_modify_ip, 
+      admin_modify_date, admin_register_date, 
+      admin_approval_date, admin_ok, admin_op, 
+      admin_issueok, admin_group, companyname, 
+      companyaddress, companyfax, usertype, 
+      checkid, companycode, companywebsite, 
+      cookie, admin_shortcut, lang, 
+      langok)
+    values (#{id,jdbcType=INTEGER}, #{adminType,jdbcType=VARCHAR}, #{adminId,jdbcType=CHAR}, 
+      #{adminPass,jdbcType=CHAR}, #{adminName,jdbcType=VARCHAR}, #{adminSex,jdbcType=BIT}, 
+      #{adminTel,jdbcType=VARCHAR}, #{adminMobile,jdbcType=VARCHAR}, #{adminEmail,jdbcType=VARCHAR}, 
+      #{adminQq,jdbcType=VARCHAR}, #{adminMsn,jdbcType=VARCHAR}, #{adminTaobao,jdbcType=VARCHAR}, 
+      #{adminIntroduction,jdbcType=VARCHAR}, #{adminLogin,jdbcType=INTEGER}, #{adminModifyIp,jdbcType=VARCHAR}, 
+      #{adminModifyDate,jdbcType=TIMESTAMP}, #{adminRegisterDate,jdbcType=TIMESTAMP}, 
+      #{adminApprovalDate,jdbcType=TIMESTAMP}, #{adminOk,jdbcType=INTEGER}, #{adminOp,jdbcType=VARCHAR}, 
+      #{adminIssueok,jdbcType=INTEGER}, #{adminGroup,jdbcType=INTEGER}, #{companyname,jdbcType=VARCHAR}, 
+      #{companyaddress,jdbcType=VARCHAR}, #{companyfax,jdbcType=VARCHAR}, #{usertype,jdbcType=INTEGER}, 
+      #{checkid,jdbcType=INTEGER}, #{companycode,jdbcType=VARCHAR}, #{companywebsite,jdbcType=VARCHAR}, 
+      #{cookie,jdbcType=VARCHAR}, #{adminShortcut,jdbcType=VARCHAR}, #{lang,jdbcType=VARCHAR}, 
+      #{langok,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sojson.datasource.common.model.WysAdminTable" >
+    insert into wys_admin_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="adminType != null" >
+        admin_type,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="adminPass != null" >
+        admin_pass,
+      </if>
+      <if test="adminName != null" >
+        admin_name,
+      </if>
+      <if test="adminSex != null" >
+        admin_sex,
+      </if>
+      <if test="adminTel != null" >
+        admin_tel,
+      </if>
+      <if test="adminMobile != null" >
+        admin_mobile,
+      </if>
+      <if test="adminEmail != null" >
+        admin_email,
+      </if>
+      <if test="adminQq != null" >
+        admin_qq,
+      </if>
+      <if test="adminMsn != null" >
+        admin_msn,
+      </if>
+      <if test="adminTaobao != null" >
+        admin_taobao,
+      </if>
+      <if test="adminIntroduction != null" >
+        admin_introduction,
+      </if>
+      <if test="adminLogin != null" >
+        admin_login,
+      </if>
+      <if test="adminModifyIp != null" >
+        admin_modify_ip,
+      </if>
+      <if test="adminModifyDate != null" >
+        admin_modify_date,
+      </if>
+      <if test="adminRegisterDate != null" >
+        admin_register_date,
+      </if>
+      <if test="adminApprovalDate != null" >
+        admin_approval_date,
+      </if>
+      <if test="adminOk != null" >
+        admin_ok,
+      </if>
+      <if test="adminOp != null" >
+        admin_op,
+      </if>
+      <if test="adminIssueok != null" >
+        admin_issueok,
+      </if>
+      <if test="adminGroup != null" >
+        admin_group,
+      </if>
+      <if test="companyname != null" >
+        companyname,
+      </if>
+      <if test="companyaddress != null" >
+        companyaddress,
+      </if>
+      <if test="companyfax != null" >
+        companyfax,
+      </if>
+      <if test="usertype != null" >
+        usertype,
+      </if>
+      <if test="checkid != null" >
+        checkid,
+      </if>
+      <if test="companycode != null" >
+        companycode,
+      </if>
+      <if test="companywebsite != null" >
+        companywebsite,
+      </if>
+      <if test="cookie != null" >
+        cookie,
+      </if>
+      <if test="adminShortcut != null" >
+        admin_shortcut,
+      </if>
+      <if test="lang != null" >
+        lang,
+      </if>
+      <if test="langok != null" >
+        langok,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="adminType != null" >
+        #{adminType,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=CHAR},
+      </if>
+      <if test="adminPass != null" >
+        #{adminPass,jdbcType=CHAR},
+      </if>
+      <if test="adminName != null" >
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminSex != null" >
+        #{adminSex,jdbcType=BIT},
+      </if>
+      <if test="adminTel != null" >
+        #{adminTel,jdbcType=VARCHAR},
+      </if>
+      <if test="adminMobile != null" >
+        #{adminMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="adminEmail != null" >
+        #{adminEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="adminQq != null" >
+        #{adminQq,jdbcType=VARCHAR},
+      </if>
+      <if test="adminMsn != null" >
+        #{adminMsn,jdbcType=VARCHAR},
+      </if>
+      <if test="adminTaobao != null" >
+        #{adminTaobao,jdbcType=VARCHAR},
+      </if>
+      <if test="adminIntroduction != null" >
+        #{adminIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="adminLogin != null" >
+        #{adminLogin,jdbcType=INTEGER},
+      </if>
+      <if test="adminModifyIp != null" >
+        #{adminModifyIp,jdbcType=VARCHAR},
+      </if>
+      <if test="adminModifyDate != null" >
+        #{adminModifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminRegisterDate != null" >
+        #{adminRegisterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminApprovalDate != null" >
+        #{adminApprovalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminOk != null" >
+        #{adminOk,jdbcType=INTEGER},
+      </if>
+      <if test="adminOp != null" >
+        #{adminOp,jdbcType=VARCHAR},
+      </if>
+      <if test="adminIssueok != null" >
+        #{adminIssueok,jdbcType=INTEGER},
+      </if>
+      <if test="adminGroup != null" >
+        #{adminGroup,jdbcType=INTEGER},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="companyaddress != null" >
+        #{companyaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyfax != null" >
+        #{companyfax,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="checkid != null" >
+        #{checkid,jdbcType=INTEGER},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="companywebsite != null" >
+        #{companywebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="cookie != null" >
+        #{cookie,jdbcType=VARCHAR},
+      </if>
+      <if test="adminShortcut != null" >
+        #{adminShortcut,jdbcType=VARCHAR},
+      </if>
+      <if test="lang != null" >
+        #{lang,jdbcType=VARCHAR},
+      </if>
+      <if test="langok != null" >
+        #{langok,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sojson.datasource.common.model.WysAdminTableExample" resultType="java.lang.Integer" >
+    select count(*) from wys_admin_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wys_admin_table
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminType != null" >
+        admin_type = #{record.adminType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminId != null" >
+        admin_id = #{record.adminId,jdbcType=CHAR},
+      </if>
+      <if test="record.adminPass != null" >
+        admin_pass = #{record.adminPass,jdbcType=CHAR},
+      </if>
+      <if test="record.adminName != null" >
+        admin_name = #{record.adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminSex != null" >
+        admin_sex = #{record.adminSex,jdbcType=BIT},
+      </if>
+      <if test="record.adminTel != null" >
+        admin_tel = #{record.adminTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminMobile != null" >
+        admin_mobile = #{record.adminMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminEmail != null" >
+        admin_email = #{record.adminEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminQq != null" >
+        admin_qq = #{record.adminQq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminMsn != null" >
+        admin_msn = #{record.adminMsn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminTaobao != null" >
+        admin_taobao = #{record.adminTaobao,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminIntroduction != null" >
+        admin_introduction = #{record.adminIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminLogin != null" >
+        admin_login = #{record.adminLogin,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminModifyIp != null" >
+        admin_modify_ip = #{record.adminModifyIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminModifyDate != null" >
+        admin_modify_date = #{record.adminModifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adminRegisterDate != null" >
+        admin_register_date = #{record.adminRegisterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adminApprovalDate != null" >
+        admin_approval_date = #{record.adminApprovalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adminOk != null" >
+        admin_ok = #{record.adminOk,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminOp != null" >
+        admin_op = #{record.adminOp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminIssueok != null" >
+        admin_issueok = #{record.adminIssueok,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminGroup != null" >
+        admin_group = #{record.adminGroup,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyname != null" >
+        companyname = #{record.companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyaddress != null" >
+        companyaddress = #{record.companyaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyfax != null" >
+        companyfax = #{record.companyfax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usertype != null" >
+        usertype = #{record.usertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkid != null" >
+        checkid = #{record.checkid,jdbcType=INTEGER},
+      </if>
+      <if test="record.companycode != null" >
+        companycode = #{record.companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companywebsite != null" >
+        companywebsite = #{record.companywebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cookie != null" >
+        cookie = #{record.cookie,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminShortcut != null" >
+        admin_shortcut = #{record.adminShortcut,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lang != null" >
+        lang = #{record.lang,jdbcType=VARCHAR},
+      </if>
+      <if test="record.langok != null" >
+        langok = #{record.langok,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wys_admin_table
+    set id = #{record.id,jdbcType=INTEGER},
+      admin_type = #{record.adminType,jdbcType=VARCHAR},
+      admin_id = #{record.adminId,jdbcType=CHAR},
+      admin_pass = #{record.adminPass,jdbcType=CHAR},
+      admin_name = #{record.adminName,jdbcType=VARCHAR},
+      admin_sex = #{record.adminSex,jdbcType=BIT},
+      admin_tel = #{record.adminTel,jdbcType=VARCHAR},
+      admin_mobile = #{record.adminMobile,jdbcType=VARCHAR},
+      admin_email = #{record.adminEmail,jdbcType=VARCHAR},
+      admin_qq = #{record.adminQq,jdbcType=VARCHAR},
+      admin_msn = #{record.adminMsn,jdbcType=VARCHAR},
+      admin_taobao = #{record.adminTaobao,jdbcType=VARCHAR},
+      admin_introduction = #{record.adminIntroduction,jdbcType=VARCHAR},
+      admin_login = #{record.adminLogin,jdbcType=INTEGER},
+      admin_modify_ip = #{record.adminModifyIp,jdbcType=VARCHAR},
+      admin_modify_date = #{record.adminModifyDate,jdbcType=TIMESTAMP},
+      admin_register_date = #{record.adminRegisterDate,jdbcType=TIMESTAMP},
+      admin_approval_date = #{record.adminApprovalDate,jdbcType=TIMESTAMP},
+      admin_ok = #{record.adminOk,jdbcType=INTEGER},
+      admin_op = #{record.adminOp,jdbcType=VARCHAR},
+      admin_issueok = #{record.adminIssueok,jdbcType=INTEGER},
+      admin_group = #{record.adminGroup,jdbcType=INTEGER},
+      companyname = #{record.companyname,jdbcType=VARCHAR},
+      companyaddress = #{record.companyaddress,jdbcType=VARCHAR},
+      companyfax = #{record.companyfax,jdbcType=VARCHAR},
+      usertype = #{record.usertype,jdbcType=INTEGER},
+      checkid = #{record.checkid,jdbcType=INTEGER},
+      companycode = #{record.companycode,jdbcType=VARCHAR},
+      companywebsite = #{record.companywebsite,jdbcType=VARCHAR},
+      cookie = #{record.cookie,jdbcType=VARCHAR},
+      admin_shortcut = #{record.adminShortcut,jdbcType=VARCHAR},
+      lang = #{record.lang,jdbcType=VARCHAR},
+      langok = #{record.langok,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
